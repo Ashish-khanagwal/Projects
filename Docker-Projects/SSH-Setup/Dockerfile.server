@@ -1,3 +1,23 @@
-FROM ubuntu
+# Use the official Ubuntu image as the base image
+FROM ubuntu:latest
 
-RUN apt-get update && apt-get install -y openssh-client
+# Install OpenSSH server, nano, and sudo
+RUN apt-get update && apt-get install -y openssh-server
+
+# Allow root login via SSH
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# Configure SSH to allow password authentication
+RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+
+RUN mkdir /run/sshd
+
+# Expose the SSH port
+EXPOSE 22
+
+# Copy the entrypoint script into the container
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Start the SSH service using the entrypoint script
+ENTRYPOINT ["/entrypoint.sh"]
