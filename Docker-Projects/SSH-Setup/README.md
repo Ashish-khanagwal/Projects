@@ -39,13 +39,13 @@ The project includes the following files:
   - Build the SSH server image:
     
     ```
-    docker build -t ssh-server -f dockerfile.server .
+    docker build -t ssh-server -f Dockerfile.server .
     ```
     
   - Build the SSH client image:
     
     ```
-    docker build -t ssh-client -f dockerfile.client .
+    docker build -t ssh-client -f Dockerfile.client .
     ```
 
 3. Run SSH Server Container:
