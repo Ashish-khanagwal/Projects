@@ -62,7 +62,7 @@ The project includes the following files:
 5. Connect from SSH Client to SSH Server:
 
    ```
-   ssh root@<IPAdress of SSH Server>
+   ssh root@<IPAddress of SSH Server>
    ```
 
 - To get IP Address of SSH Server, Run
