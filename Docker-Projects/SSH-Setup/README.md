@@ -35,3 +35,40 @@ The project includes the following files:
    ```
 
 2. **Build Docker Images:**
+   
+  - Build the SSH server image:
+    
+    ```
+    docker build -t ssh-server -f dockerfile.server .
+    ```
+    
+  - Build the SSH client image:
+    
+    ```
+    docker build -t ssh-client -f dockerfile.client .
+    ```
+
+3. Run SSH Server Container:
+
+   ```
+   docker run -d --name ssh-server-container -e ROOT_PASSWORD=<your-root-password> -p 2222:22 ssh-server 
+  
+4. Run SSH Client Container:
+
+   ```
+   docker run -it --name ssh-client-container --link ssh-server-container ssh-client
+   ```
+
+5. Connect from SSH Client to SSH Server:
+
+   ```
+   ssh root@<IPAdress of SSH Server>
+   ```
+
+- To get IP Address of SSH Server, Run
+    
+    ```
+    docker inspect <SSH Server name> | grep IPAddress
+    ```
+
+**You should now be connected to the SSH server container as root. You can interact with the server as needed.**
